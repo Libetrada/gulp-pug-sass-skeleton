@@ -8,6 +8,7 @@ var notify = require("gulp-notify");
 var browserSync = require('browser-sync');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer');
 
 /**
  * 開発用のディレクトリを指定します。
@@ -66,6 +67,9 @@ gulp.task('sass', function () {
  return gulp.src(src.sass, {base: src.root})
    .pipe(sourcemaps.init())
    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+   .pipe(sourcemaps.write({includeContent: false}))
+   .pipe(sourcemaps.init({loadMaps: true}))
+   .pipe(autoprefixer(['last 3 versions', 'ie >= 8', 'Android >= 4', 'iOS >= 8']))
    .pipe(sourcemaps.write())
    .pipe(gulp.dest(dest.root))
    .pipe(browserSync.reload({stream: true}));
