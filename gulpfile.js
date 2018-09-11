@@ -101,6 +101,7 @@ gulp.task('browser-sync', function() {
  */
 gulp.task('watch', ['html', 'js', 'sass', 'browser-sync'], function() {
   gulp.watch(src.html, ['html']);
+  gulp.watch('src/**/_*.pug', ['html']); // _hogehoge.pugもwatchしたい
   gulp.watch(src.js, ['js']);
   gulp.watch(src.sass, ['sass']);
 });
